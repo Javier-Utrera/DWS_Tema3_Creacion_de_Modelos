@@ -30,11 +30,12 @@ class Tarea(models.Model):
     prioridad=models.IntegerField()
     estado=models.CharField(max_length=4,choices=opciones)
     completada=models.BooleanField(default=False)
+    fecha_creacion=models.DateTimeField()
     hora_vencimiento=models.TimeField()
     #
     creador=models.ForeignKey(Usuario,on_delete=models.CASCADE)   
     proyecto=models.ForeignKey(Proyecto,on_delete=models.CASCADE)
-    usuarios_asignados=models.ManyToManyField(Usuario,through='Asignacion_tarea',related_name='usuarios_asignados')
+    usuarios_asignados=models.ManyToManyField(Usuario,through='Asignacion_tarea',related_name='name_usuarios_asignados')
     #hola
        
     

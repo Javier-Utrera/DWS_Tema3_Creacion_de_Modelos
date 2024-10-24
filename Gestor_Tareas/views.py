@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 
 # Create your views here.
+
     #1El index html
 def index(request):
     return render(request,"index.html")
@@ -16,20 +17,20 @@ def todos_los_proyectos(request):
     #3todas las tareas que están asociadas a un proyecto, 
     # ordenadas por fecha de creación descendente.
 def tareas_de_un_proyecto(request,id_proyecto):
-    proyecto=Proyecto.objects.get(id=id_proyecto)
     tareas = Tarea.objects.select_related("creador","proyecto").prefetch_related("usuarios_asignados")
-    tareas=tareas.filter(proyecto=id_proyecto).order_by("titulo")
+    tareas=tareas.filter(proyecto=id_proyecto).order_by("fecha_creacion")
     return render(request,"tareas_de_un_proyecto.html",{'views_proyectos_mostrar_tareas':tareas})
     
-    
-   
     #4todos los usuarios que están asignados a una tarea 
     # ordenados por la fecha de asignación de la tarea de forma ascendente. 
+    #select Usuario.* from Usuario join Asignacion_tarea ON  Usuario.id=Asignacion_tarea.usuario join Tarea ON Tarea.id=Asignacion_tarea.tarea where Tarea.id=id_tarea
+def usuarios_de_una_tarea(request, id_tarea):
+    tarea = Tarea.objects.select_related("creador", "proyecto").prefetch_related("usuarios_asignados").get(id=id_tarea)
+    return render(request, "usuariosdeunproyecto.html", {'views_usuario_de_una_tarea': tarea})
 
-
- 
     #5todas las tareas que tengan un texto en concreto en las 
     # observaciones a la hora de asignarlas a un usuario.
+ 
     
     #6todos las tareas que se han creado entre dos años y el estado 
     # sea “Completada”.
