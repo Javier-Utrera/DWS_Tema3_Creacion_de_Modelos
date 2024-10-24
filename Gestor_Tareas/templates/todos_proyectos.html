@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Esto muestra todos los proyectos</h1>
+    {% for proyecto in  views_proyectos_mostrar %}
+        <div style="background-color: rgb(176, 252, 226);">
+            <h2>Titulo: {{proyecto.nombre}}</h2>
+            <h2>Descripcion: {{proyecto.descripcion}}</h2> 
+            <h2>Duracion estimada : {{proyecto.duracion_estimada}}</h2> 
+            <h2>Fecha de inicio: {{proyecto.fecha_inicio}}</h2> 
+            <h2>Fecha de finalizacion: {{proyecto.fecha_finalizacion}}</h2> 
+            <h2>Usuarios asignados</h2>
+            <ul>
+                {% for usuario_asignado in proyecto.usuarios_asignados.all %}
+                    <li>{{usuario_asignado.nombre}}</li>
+                {% endfor %}
+            </ul>
+            <h2>Creador: {{proyecto.creador.nombre}}</h2>
+        </div>
+        <br>
+        <br>
+    {% endfor %}
+</body>
+</html>
