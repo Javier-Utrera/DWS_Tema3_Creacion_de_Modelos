@@ -55,7 +55,7 @@ class Comentario(models.Model):
     contenido=models.TextField()
     fecha_comentario=models.DateTimeField()
     #
-    autor=models.OneToOneField(Usuario,on_delete=models.CASCADE)
-    tarea=models.OneToOneField(Tarea,models.CASCADE)
+    autor=models.OneToOneField(Usuario,on_delete=models.CASCADE,related_name='usuario_comentario')
+    tarea=models.OneToOneField(Tarea,models.CASCADE,related_name='tarea_comentario')
 
     
