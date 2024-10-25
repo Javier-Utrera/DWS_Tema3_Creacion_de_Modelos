@@ -42,7 +42,7 @@ class Tarea(models.Model):
 class Etiqueta(models.Model):
     nombre=models.CharField(max_length=100, unique=True)
     #
-    etiquetas_asociadas=models.ManyToManyField(Tarea)
+    etiquetas_asociadas=models.ManyToManyField(Tarea,related_name='tarea_etiqueta')
     
 class Asignacion_tarea(models.Model):
     observaciones=models.TextField()
