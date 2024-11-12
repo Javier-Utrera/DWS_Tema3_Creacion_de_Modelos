@@ -8,7 +8,7 @@
 <body>
     <h1>Esto debe mostrar las tareas asociadas a un proyecto</h1>
     {% for tarea in views_proyectos_mostrar_tareas %}
-        <div style="background-color: rgb(176, 252, 226);">
+        <div>
             <h2>Titulo: {{tarea.titulo}}</h2>
             <h2>Descripcion: {{tarea.descripcion}}</h2>
             <h2>Fecha de creacion: {{tarea.fecha_creacion}}</h2>  
@@ -17,8 +17,6 @@
             <h2>Completada: {{tarea.completada}}</h2> 
             <h2>Creador: {{tarea.creador.nombre}}</h2>
         </div>
-        <br>
-        <br>
     {% endfor %}  
 </body>
 </html>

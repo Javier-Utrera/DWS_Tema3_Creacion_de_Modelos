@@ -10,7 +10,7 @@
     <p>Texto : City follow carry. Charge write thousand a up human. Sound easy age space unit hour.</p>
 
     {% for tareas in views_tareas_observaciones %}
-        <div style="background-color: rgb(176, 252, 226);">
+        <div>
             <h2>Titulo: {{tareas.titulo}}</h2>
             <h2>Descripcion: {{tareas.descripcion}}</h2>
             <h2>Fecha de creacion: {{tareas.fecha_creacion}}</h2>  
@@ -19,8 +19,6 @@
             <h2>Completada: {{tareas.completada}}</h2> 
             <h2>Creador: {{tareas.creador.nombre}}</h2>
         </div>
-        <br>
-        <br>
     {% endfor %}  
 </body>
 </html>

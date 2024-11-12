@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from django.db.models import Q
-from django.views.defaults import page_not_found
+
 
 # Create your views here.
 

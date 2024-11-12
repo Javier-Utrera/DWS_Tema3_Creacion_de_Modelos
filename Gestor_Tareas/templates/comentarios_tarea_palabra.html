@@ -9,7 +9,7 @@
     <h1>Todos los comentarios de una tarea que empiecen por la palabra que se pase en la URL y que el año del comentario sea uno en concreto. </h1>
     <h2>1972/R</h2>
     {% for comentario in views_todos_comentarios_palabra_anio %}
-        <div style="background-color: rgb(176, 252, 226)">
+        <div>
         <h2>IDComentario : {{ comentario.id}} </h2>
         <h2>Contenido : {{ comentario.contenido }} </h2>
         <h2>Fecha del comentario : {{ comentario.fecha_comentario }} </h2>
