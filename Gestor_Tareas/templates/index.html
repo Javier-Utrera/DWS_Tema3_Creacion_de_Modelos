@@ -1,55 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
-<body>
-    <h1>Gestor de tareas</h1>
-    <h2>Listado de enlaces</h2>
-    <ul>
-        <li>
-            <a href="{% url 'urls_todos_los_proyectos' %}">
-                2.Mostrar una lista de todos los proyectos de la aplicación con sus datos correspondientes.</a>
-        </li>
-        <li>
-            <a href="{% url 'urls_tarea_idproyecto' id_proyecto=12 %}">
-                3.Mostrar todas las tareas que están asociadas a un proyecto, 
-                ordenadas por fecha de creación descendente.</a>
-        </li>
-        <li>
-            <a href="{% url 'urls_usuario_idtarea' id_tarea=1 %}">
-                4.Mostrar todos los usuarios que están asignados a una tarea 
-                ordenados por la fecha de asignación de la tarea de forma ascendente. </a>
-        </li>
-        <li>
-            <a href="{% url 'urls_tareas_observaciones' observacion='City' %}">
-                5.Todas las tareas que tengan un texto en concreto en las 
-                observaciones a la hora de asignarlas a un usuario. </a>
-        </li>
-        <li>
-            <a href="{% url 'urls_tareas_anios_completada' anio1=1960 anio2=2020 %}">
-                6.Todos las tareas que se han creado entre dos años y el estado 
-                sea “Completada”. </a>
-        </li>
-        <li>
-            <a href="{% url 'urls_ultimo_usuario_comentado' id_proyecto=1 %}">
-                7.El último usuario que ha comentado en una tarea de un proyecto en concreto. </a>
-        </li>
-        <li>
-            <a href="{% url 'urls_todos_comentarios_palabra_anio' anio=1972 palabra='R' %}">
-                8.Todos los comentarios de una tarea que empiecen por la palabra que 
-                se pase en la URL y que el año del comentario sea uno en concreto. </a>
-        </li>
-        <li>
-            <a href="{% url 'urls_todas_etiquetas_proyecto' id_proyecto=12 %}">
-                9.Todas las etiquetas que se han usado en todas las tareas de un proyecto. </a>
-        </li>
-        <li>
-            <a href="{% url 'urls_usuarios_sin_tarea' %}">
-                10.todos los usuarios que no están asignados a una tarea. </a>
-        </li>
-    </ul> 
-</body>
-</html>
+{% extends "estructura/padre.html"%}
+{% block cabecera %}
+<h1>Este es el indice</h1>
+{% endblock %}
+{% block contenido%}
+<p>Se ha movido el contenido del index</p>
+{% endblock%}

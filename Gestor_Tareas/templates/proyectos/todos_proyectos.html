@@ -1,0 +1,34 @@
+{% extends "estructura/padre.html"%}
+
+{% block cabecera %}
+    <h1>Esto muestra todos los proyectos</h1>
+{% endblock %}
+
+{% block contenido%}
+    {% for proyecto in views_proyectos_mostrar %}
+        <h2>ID: {{proyecto.id}}</h2>
+        <h2>Nombre: {{proyecto.nombre}}</h2>
+        <h2>Descripcion: {{proyecto.descripcion}}</h2>
+        <h2>Duracion estimada: {{proyecto.duracion_estimada}}</h2>
+        <h2>Fecha inicio: {{proyecto.fecha_inicio}}</h2>
+        <h2>Fecha fin: {{proyecto.fecha_finalizacion}}</h2>
+        <h2>Creador: {{proyecto.creador.nombre}}
+
+
+        <h2>Colaboradores</h2>
+        <ul>
+            {% for usuario in proyecto.usuarios_asignados.all %}
+                <li>Usuario: {{usuario.nombre}}</li>
+            {%endfor%}
+        </ul>
+
+        <h2>Tareas</h2>
+        <ul>
+            {% for tarea in proyecto.tarea_proyecto.all %}
+                <li>Tarea: {{tarea.titulo}}</li>
+            {%endfor%}
+        </ul>
+    {% endfor %}
+{% endblock%}
+   
+    

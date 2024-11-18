@@ -11,13 +11,13 @@ class Usuario(models.Model):
     
 class Proyecto(models.Model):
     nombre=models.CharField(max_length=100)
-    descipcion=models.TextField()
+    descripcion=models.TextField()
     duracion_estimada=models.FloatField()
     fecha_inicio=models.DateField()
     fecha_finalizacion=models.DateField()
     #
-    usuarios_asignados=models.ManyToManyField(Usuario,related_name='usuarios')
-    creador=models.OneToOneField(Usuario,on_delete=models.CASCADE)
+    usuarios_asignados=models.ManyToManyField(Usuario,related_name='proyecto_usuarios_asignados')
+    creador=models.OneToOneField(Usuario,on_delete=models.CASCADE,related_name='proyecto_creador')
 
 class Tarea(models.Model):
     opciones= [ 
@@ -33,29 +33,28 @@ class Tarea(models.Model):
     fecha_creacion=models.DateTimeField()
     hora_vencimiento=models.TimeField()
     #
-    creador=models.ForeignKey(Usuario,on_delete=models.CASCADE)   
-    proyecto=models.ForeignKey(Proyecto,on_delete=models.CASCADE)
-    usuarios_asignados=models.ManyToManyField(Usuario,through='Asignacion_tarea',related_name='name_usuarios_asignados')
-    #hola
+    creador=models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name='tarea_creador')   
+    proyecto=models.ForeignKey(Proyecto,on_delete=models.CASCADE,related_name='tarea_proyecto')
+    usuarios_asignados=models.ManyToManyField(Usuario,through='Asignacion_tarea',related_name='tarea_usuarios_asignados')
        
     
 class Etiqueta(models.Model):
     nombre=models.CharField(max_length=100, unique=True)
     #
-    etiquetas_asociadas=models.ManyToManyField(Tarea,related_name='tarea_etiqueta')
+    etiquetas_asociadas=models.ManyToManyField(Tarea,related_name='etiquetas_etiquetas_asociadas')
     
 class Asignacion_tarea(models.Model):
     observaciones=models.TextField()
     fecha_asignacion=models.DateTimeField(default=timezone.now)
     #
-    tarea=models.ForeignKey(Tarea,on_delete=models.CASCADE)
-    usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    tarea=models.ForeignKey(Tarea,on_delete=models.CASCADE, related_name='asignacion_tarea_tarea')
+    usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE, related_name='asignacion_usuario')
     
 class Comentario(models.Model):
     contenido=models.TextField()
     fecha_comentario=models.DateTimeField()
     #
-    autor=models.OneToOneField(Usuario,on_delete=models.CASCADE,related_name='usuario_comentario')
-    tarea=models.OneToOneField(Tarea,models.CASCADE,related_name='tarea_comentario')
+    autor=models.OneToOneField(Usuario,on_delete=models.CASCADE,related_name='comentario_autor')
+    tarea=models.OneToOneField(Tarea,models.CASCADE,related_name='comentario_tarea')
 
     

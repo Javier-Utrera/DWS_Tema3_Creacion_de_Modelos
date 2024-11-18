@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>El último usuario que ha comentado en una tarea de un proyecto en concreto. ID proyecto 1</h1>
+{% extends "estructura/padre.html"%}
 
+{% block cabecera %}
+    <h1>El último usuario que ha comentado en una tarea de un proyecto en concreto. ID proyecto 1</h1>
+{% endblock %}
+
+{% block contenido%}
     <h2>ID Usuario : {{ views_ultimo_usuario_comentado.id }} </h2>
     <h2>Nombre : {{ views_ultimo_usuario_comentado.nombre }} </h2>
     <h2>Correo electronico : {{ views_ultimo_usuario_comentado.correo_electronico }} </h2>
     <h2>Contraseña : {{ views_ultimo_usuario_comentado.contrasenia }} </h2>
     <h2>Fecha_registro : {{ views_ultimo_usuario_comentado.fecha_de_registro}} </h2>
-</body>
-</html>
+{% endblock%}
+
+    
+
+

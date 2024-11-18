@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "estructura/padre.html"%}
+
+{% block cabecera %}
     <h1>Todas las etiquetas que se han usado en todas las tareas de un proyecto.</h1>
+{% endblock %}
+
+{% block contenido%}
     {% for usuario in views_usuarios_sin_tarea %}
-        <div>
         <h2>ID usuario : {{ usuario.id}} </h2>
         <h2> Nombre usuario: {{usuario.nombre}}</h2>
-        </div>
     {% endfor %}
-</body>
-</html>
+{% endblock%}
+
+    
+
