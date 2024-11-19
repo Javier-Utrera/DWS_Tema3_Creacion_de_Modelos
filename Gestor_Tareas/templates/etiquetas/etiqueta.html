@@ -1,0 +1,12 @@
+<div>
+    <h2>ID etiqueta: {{etiqueta.id}}</h2>
+    <h2>Nombre: {{etiqueta.nombre}}</h2>
+    <h2>Tareas Asociadas</h2>
+    <ul>
+    {% for tarea in etiqueta.etiquetas_asociadas.all %}
+        <li>Tarea: {{tarea.titulo}}</li>
+    {% empty %}  
+        <h1>Lo siento, no existen tareas</h1>
+    {% endfor %}
+    </ul>    
+</div>

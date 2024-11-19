@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block contenido%}
+    <h1>Etiquetas</h1>
     {% for etiqueta in views_todas_etiquetas_proyecto %}
-        <h2>ID Etiqueta : {{ etiqueta.id}} </h2>
-        <h2>Contenido : {{ etiqueta.nombre }} </h2>
+        {% include 'etiquetas/etiqueta.html' %}   
+    {% empty %}  
+        <h1>Lo siento, no existen estas etiquetas</h1>
     {% endfor %}
 {% endblock%}
     

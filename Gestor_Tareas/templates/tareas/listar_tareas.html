@@ -6,39 +6,8 @@
 
 {% block contenido%}
     {% for tarea in views_tareas %}
-        <h2>Id_Tarea: {{tarea.id}}</h2>
-        <h2>Título: {{tarea.titulo}}</h2>
-        <h2>Descripcion: {{tarea.descripcion}}</h2>
-        <h2>Prioridad: {{tarea.prioridad}}</h2>
-        <h2>Estado: {{tarea.get_estado_display}}</h2>
-        <h2>Completada: {{tarea.get_completada_display}}</h2>
-        <h2>Fecha Creacion: {{tarea.fecha_creacion}}</h2>
-        <h2>Hora vencimiento: {{tarea.hora_vencimiento}}</h2>
-        
-        <h2>Creador: {{tarea.creador.nombre}}</h2>
-
-        <h2>Usuarios Asignados</h2>
-        <ul>
-            {% for usuario in tarea.usuarios_asignados.all%}
-                <li>Usuario: {{usuario.nombre}}</li>
-            {%endfor%}
-        </ul>
-
-        <h2>Etiquetas</h2>
-        <ul>
-            {% for etiqueta in tarea.etiquetas_etiquetas_asociadas.all%}
-                <li>Etiqueta: {{etiqueta.nombre}}</li>
-            {%endfor%}
-        </ul>
-
-        <h2>Comentarios</h2>
-        {% for comentario in tarea.comentario_tarea.all%}
-        <div>
-            <ul>
-                <li>Autor: {{comentario.autor.nombre}} </li>
-                <li>Comentario: {{comentario.contenido}}</li>
-            </ul>
-        <div>
-        {%endfor%}      
+        {% include 'tareas/tarea.html' %}   
+    {% empty %}  
+        <h1>Lo siento, no existen estas tareas</h1>
     {% endfor %}
 {% endblock%}

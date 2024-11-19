@@ -1,0 +1,16 @@
+{% extends "estructura/padre.html"%}
+
+{% block cabecera %}
+    <h1>Esto muestra todos los usuarios  </h1>
+{% endblock %}
+
+{% block contenido%}
+    {% for usuario in views_usuarios %}
+        {% include 'usuarios/usuario.html' %}
+    {% empty %}  
+        <h1>Lo siento, no existen los usuarios</h1>
+    {% endfor %}
+{% endblock%}
+
+    
+

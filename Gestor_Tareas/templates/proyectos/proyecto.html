@@ -1,0 +1,27 @@
+<div>
+    <h2>ID: {{ proyecto.id }}</h2>
+    <h2>Nombre: {{ proyecto.nombre }}</h2>
+    <h2>Longitud del Nombre: {{ proyecto.nombre|wordcount }} palabras </h2>
+    <h2>Descripción: {{ proyecto.descripcion }}</h2>
+    <h2>Duración estimada: {{ proyecto.duracion_estimada }}</h2>
+    <h2>Fecha inicio: {{ proyecto.fecha_inicio }}</h2>
+    <h2>Fecha fin: {{ proyecto.fecha_finalizacion }}</h2>
+
+    <h2>Colaboradores</h2>
+    <ul>
+        {% for usuario in proyecto.usuarios_asignados.all %}
+            <li>Usuario: {{ usuario.nombre }}</li>
+        {% empty %}
+            <h1>Lo siento, no hay colaboradores</h1>
+        {% endfor %}
+    </ul>
+
+    <h2>Tareas</h2>
+    <ul>
+        {% for tarea in proyecto.tarea_proyecto.all %}
+            <li>Tarea: {{ tarea.titulo }}</li>
+        {% empty %}
+            <h1>Lo siento, no existen tareas en este proyecto</h1>
+        {% endfor %}
+    </ul>   
+</div>

@@ -1,0 +1,54 @@
+<div>
+    
+        <h2>Id_Tarea: {{tarea.id}}</h2>
+        <h2>Título: {{tarea.titulo|capfirst}}</h2>
+        <h2>Descripcion: {{tarea.descripcion|default:"Sin descripción disponible"}}</h2>
+        <h2>Prioridad: {{tarea.prioridad}}</h2>
+        <h2>Estado: 
+            {% if tarea.estado == "Pend" %}
+                <span style="color: red;">Pendiente</span>
+            {% elif tarea.estado == "Prog" %}
+                <span style="color: orange;">En Progreso</span>
+            {% elif tarea.estado == "Comp" %}
+                <span style="color: green;">Completada</span>
+            {% else %}
+                <span style="color: gray;">Estado desconocido</span>
+            {% endif %}
+        </h2>
+        <h2>Completada: {{tarea.get_completada|yesno:"Sí,No"}}</h2>
+        <h2>Fecha Creacion: {{tarea.fecha_creacion|date:"d/m/Y"}}</h2>
+        <h2>Hora vencimiento: {{tarea.hora_vencimiento|time:"H:i A"}}</h2>
+        
+        <h2>Creador: {{tarea.creador.nombre}}</h2>
+
+        <h2>Usuarios Asignados</h2>
+        <ul>
+            {% for usuario in tarea.usuarios_asignados.all%}
+                <li>Usuario: {{usuario.nombre}}</li>
+            {% empty %}  
+                <h1>Lo siento, no existen usuarios asignados a esta tarea</h1>
+            {% endfor %}
+        </ul>
+
+        <h2>Etiquetas</h2>
+        <ul>
+            {% for etiqueta in tarea.etiquetas_etiquetas_asociadas.all%}
+                <li>Etiqueta: {{etiqueta.nombre}}</li>
+                {% empty %}  
+                <h1>Lo siento, no existen etiquetas asignadas a esta tarea</h1>
+            {% endfor %}
+        </ul>
+
+        <h2>Comentarios</h2>
+        {% for comentario in tarea.comentario_tarea.all%}
+        <div>
+            <ul>
+                <li>Autor: {{comentario.autor.nombre}} </li>
+                <li>Comentario: {{comentario.contenido}}</li>
+            </ul>
+        <div>
+            {% empty %}  
+            <h1>Lo siento, no existen comentarios asignados a esta tarea</h1>
+        {% endfor %}      
+
+</div>

@@ -1,0 +1,57 @@
+<div>
+    <h2>Id_usuario: {{usuario.id}}</h2>
+    <h2>Nombre: {{usuario.nombre|lower}}</h2>
+    <h2>email: {{usuario.email|upper}}</h2>
+    <h2>Password: {{usuario.password}}</h2>
+    <h2>Fecha registro: {{usuario.fecha_registro}}</h2>
+
+    <h2>Proyectos que ha creado</h2>
+    <ul>
+    {% for proyecto in usuario.proyecto_creador.all %}
+            
+            <li>{{proyecto.nombre}}</li>
+            {% empty %}  
+            <h1>Lo siento, no este usuario no ha creado ningun proyecto</h1>
+        {% endfor %}
+    </ul>
+
+    <h2>Proyectos asociados</h2>
+    <ul>
+    {% for proyecto in usuario.proyecto_usuarios_asignados.all %}
+        
+            <li>{{proyecto.nombre}}</li>
+        
+            {% empty %}  
+            <h1>Lo siento, este usuario no tiene ningun proyecto asignado</h1>
+        {% endfor %}
+    </ul>
+    <h2>Tareas creadas</h2>
+    <ul>
+        <p>Ha creado {{ usuario.tarea_creador.all|length }} tareas</p>
+    {% for tarea in usuario.tarea_creador.all %}              
+            <li>{{tarea.titulo}}</li>       
+            {% empty %}  
+            <h1>Lo siento, este usuario no ha creado ninguna tarea</h1>
+        {% endfor %}
+    </ul>
+    <h2>Tareas asignadas</h2>
+    <ul>
+    {% for tarea in usuario.tarea_usuarios_asignados.all %}
+        
+            <li>{{tarea.titulo}}</li>
+    
+            {% empty %}  
+            <h1>Lo siento, este usuario no tiene ninguna tarea asignada</h1>
+        {% endfor %}
+    </ul>
+    <h2>Comentarios creados</h2>
+    <ul>
+    {% for comentario in usuario.comentario_autor.all %}
+    
+            <li>{{comentario.contenido}}</li>
+    
+            {% empty %}  
+            <h1>Lo siento, este usuario no ha creado ningun comentario</h1>
+        {% endfor %}
+    </ul>
+</div>    

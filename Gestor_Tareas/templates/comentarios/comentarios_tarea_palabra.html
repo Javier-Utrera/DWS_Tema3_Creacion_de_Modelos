@@ -6,9 +6,10 @@
 {% endblock %}
 
 {% block contenido%}
+    <h1>Comentarios</h1>
     {% for comentario in views_todos_comentarios_palabra_anio %}
-        <h2>IDComentario : {{ comentario.id}} </h2>
-        <h2>Contenido : {{ comentario.contenido }} </h2>
-        <h2>Fecha del comentario : {{ comentario.fecha_comentario }} </h2>
+        {% include 'comentarios/comentario.html' %}   
+    {% empty %}  
+        <h1>Lo siento, no existen estas tareas</h1>
     {% endfor %}
 {% endblock%}

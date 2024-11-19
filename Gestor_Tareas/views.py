@@ -38,7 +38,7 @@ def usuarios_de_una_tarea(request, id_tarea):
                         .filter(asignacion_usuario__tarea__id=id_tarea)
                         .order_by("asignacion_usuario__fecha_asignacion")
     ).all()   
-    return render(request, "usuarios/usuarios_de_una_tarea.html", {'views_usuario_de_una_tarea': usuarios})
+    return render(request, "usuarios/listar_usuarios.html", {'views_usuarios': usuarios})
 
     #5todas las tareas que tengan un texto en concreto en las 
     # observaciones a la hora de asignarlas a un usuario.
@@ -88,19 +88,29 @@ def ultimo_usuario_comentado(request,id_proyecto):
     
     #8todos los comentarios de una tarea que empiecen por la palabra que 
     # se pase en la URL y que el año del comentario sea uno en concreto.
-def todos_comentarios_palabra_anio(request,anio,palabra):
-    comentarios=Comentario.objects.filter(fecha_comentario__year=anio,contenido__startswith=palabra).all()
+def todos_comentarios_palabra_anio(request,anio,palabra):   
+    comentarios = (Comentario.objects.select_related("autor")
+                  .filter(fecha_comentario__year=anio)
+                  .filter(contenido__startswith=palabra)
+    ).all()
     return render(request, "comentarios/comentarios_tarea_palabra.html",{'views_todos_comentarios_palabra_anio' : comentarios})
 
     #9todas las etiquetas que se han usado en todas las tareas de un proyecto.
 def todas_etiquetas_proyecto(request,id_proyecto):
-    etiquetas=Etiqueta.objects.filter(etiquetas_asociadas__proyecto=id_proyecto).all()
+    etiquetas=Etiqueta.objects.prefetch_related("etiquetas_asociadas").filter(etiquetas_asociadas__proyecto=id_proyecto).all()
     return render(request, "etiquetas/todas_etiquetas_proyecto.html",{'views_todas_etiquetas_proyecto' : etiquetas})
     
     #10todos los usuarios que no están asignados a una tarea.
 def usuarios_sin_tarea(request):
-    usuarios_sin_tarea=Usuario.objects.filter(name_usuarios_asignados=None).all()
-    return render(request, "usuarios/usuarios_sin_tarea.html",{'views_usuarios_sin_tarea' : usuarios_sin_tarea})
+    usuarios = (Usuario.objects.prefetch_related(
+                            Prefetch("proyecto_creador"),
+                            Prefetch("tarea_creador"),
+                            Prefetch("tarea_usuarios_asignados"),
+                            Prefetch("asignacion_usuario"),
+                            Prefetch("comentario_autor"),
+                               ))
+    usuarios=usuarios.filter(tarea_usuarios_asignados=None).all()
+    return render(request, "usuarios/listar_usuarios.html",{'views_usuarios' : usuarios})
 
 def mi_error_400(request,exception=None):
     return render(request,"errores/400.html",None,None,400)
